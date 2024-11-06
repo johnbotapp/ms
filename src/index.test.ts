@@ -23,6 +23,11 @@ describe('ms(string)', () => {
     expect(ms('2d')).toBe(172800000);
   });
 
+  //French
+  it('should convert j to ms', () => {
+    expect(ms('2j')).toBe(172800000);
+  });
+
   it('should convert w to ms', () => {
     expect(ms('3w')).toBe(1814400000);
   });
@@ -37,6 +42,11 @@ describe('ms(string)', () => {
 
   it('should convert y to ms', () => {
     expect(ms('1y')).toBe(31557600000);
+  });
+
+  //French
+  it('should convert a to ms', () => {
+    expect(ms('1a')).toBe(31557600000);
   });
 
   it('should work with decimals', () => {
@@ -111,12 +121,22 @@ describe('ms(long string)', () => {
     expect(ms('2 days')).toBe(172800000);
   });
 
+  //French
+  it('should convert jours to ms', () => {
+    expect(ms('2 jours')).toBe(172800000);
+  });
+
   it('should convert weeks to ms', () => {
     expect(ms('1 week')).toBe(604800000);
   });
 
   it('should convert years to ms', () => {
     expect(ms('1 year')).toBe(31557600000);
+  });
+
+  //French
+  it('should convert années to ms', () => {
+    expect(ms('1 année')).toBe(31557600000);
   });
 
   it('should work with decimals', () => {

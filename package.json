@@ -1,8 +1,8 @@
 {
-  "name": "ms",
-  "version": "3.0.0-canary.1",
+  "name": "@johnbotapp/ms",
+  "version": "1.0.0",
   "description": "Tiny millisecond conversion utility",
-  "repository": "vercel/ms",
+  "repository": "johnbotapp/ms",
   "main": "./dist/index.cjs",
   "type": "module",
   "exports": {

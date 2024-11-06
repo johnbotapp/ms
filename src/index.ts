@@ -39,7 +39,25 @@ type Unit =
   | 'Msec'
   | 'Ms';
 
-type UnitAnyCase = Unit | Uppercase<Unit> | Lowercase<Unit>;
+type FRUnit =
+  | 'Années' // Years
+  | 'Annees' // Years
+  | 'Année' // Year
+  | 'Annee' // Year
+  | 'Ans' // Yrs
+  | 'An' // Yr
+  | 'A' // Y
+  | 'Jours' // Days
+  | 'Jour' // Day
+  | 'J'; // D
+
+type UnitAnyCase =
+  | Unit
+  | Uppercase<Unit>
+  | Lowercase<Unit>
+  | FRUnit
+  | Uppercase<FRUnit>
+  | Lowercase<FRUnit>;
 
 export type StringValue =
   | `${number}`
@@ -92,7 +110,7 @@ export function parse(str: string): number {
     );
   }
   const match =
-    /^(?<value>-?(?:\d+)?\.?\d+) *(?<type>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
+    /^(?<value>-?(?:\d+)?\.?\d+) *(?<type>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|jours?|j|weeks?|w|years?|yrs?|y|années?|annees?|ans?|a)?$/i.exec(
       str,
     );
   // Named capture groups need to be manually typed today.
@@ -102,13 +120,22 @@ export function parse(str: string): number {
     return NaN;
   }
   const n = parseFloat(groups.value);
-  const type = (groups.type || 'ms').toLowerCase() as Lowercase<Unit>;
+  const type = (groups.type || 'ms').toLowerCase() as
+    | Lowercase<Unit>
+    | Lowercase<FRUnit>;
   switch (type) {
     case 'years':
     case 'year':
     case 'yrs':
     case 'yr':
     case 'y':
+    case 'années':
+    case 'annees':
+    case 'année':
+    case 'annee':
+    case 'ans':
+    case 'an':
+    case 'a':
       return n * y;
     case 'weeks':
     case 'week':
@@ -117,6 +144,9 @@ export function parse(str: string): number {
     case 'days':
     case 'day':
     case 'd':
+    case 'jours':
+    case 'jour':
+    case 'j':
       return n * d;
     case 'hours':
     case 'hour':

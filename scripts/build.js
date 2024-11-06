@@ -41,7 +41,7 @@ function compile(files, options) {
 
   host.writeFile = (fileName, contents) => {
     const isDts = fileName.endsWith('.d.ts');
-    let path = join(DIR, fileName.split(sep)[1]);
+    let path = join(DIR, fileName.split('/' /*sep*/)[1]);
 
     if (!isDts) {
       switch (compilerOptions.module) {
